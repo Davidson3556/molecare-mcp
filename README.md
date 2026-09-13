@@ -133,9 +133,11 @@ base and need no API, no key, and no network.
 | `get_malignant_conditions` | Malignant skin conditions with codes |
 
 **Resources:** `molecare://knowledge/*` — ABCDE criteria, Fitzpatrick skin types,
-prevention, when to see a dermatologist. `molecare://ontology/*` — SNOMED CT and
-ICD-10 reference lists, the full `snomed-icd10-map` mapping table, and risk
-factors, all with provenance metadata.
+sun protection, common benign lesions, skin self-examination, preparing for a
+dermatology appointment, prevention, and when to see a dermatologist. New
+educational resources include their named medical sources in the response.
+`molecare://ontology/*` provides SNOMED CT and ICD-10 reference lists, the full
+`snomed-icd10-map` mapping table, and risk factors, all with provenance metadata.
 
 ### What the terminology actually covers
 

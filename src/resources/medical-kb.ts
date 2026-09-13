@@ -27,6 +27,12 @@ interface KnowledgeEntry {
 interface Resource {
   title: string;
   content: any;
+  sources?: Array<{
+    title: string;
+    publisher: string;
+    url: string;
+    accessed: string;
+  }>;
   disclaimer: string;
 }
 
@@ -339,6 +345,196 @@ const RESOURCES: Record<string, Resource> = {
     },
     disclaimer:
       "This information is for educational purposes only and does not constitute medical advice. When in doubt, always consult a healthcare professional.",
+  },
+
+  "molecare://knowledge/sun-protection": {
+    title: "Understanding SPF and Sun Protection",
+    content: {
+      overview:
+        "Sun protection combines shade, clothing, sunglasses, and sunscreen. Sunscreen does not provide complete protection on its own.",
+      labels: {
+        spf:
+          "Sun protection factor (SPF) describes protection against ultraviolet B (UVB) radiation under test conditions. It does not describe UVA protection.",
+        uva:
+          "On UK labels, look for at least four UVA stars or the letters UVA inside a circle. 'Broad spectrum' means the product provides both UVA and UVB protection.",
+      },
+      sunscreenUse: [
+        "Use at least SPF 30 on exposed skin and apply enough to achieve the protection stated on the label.",
+        "Reapply liberally and frequently, following the product instructions. Reapply after swimming, towel drying, sweating, or when the product may have rubbed off.",
+        "The NHS also recommends reapplying every two hours while exposed to the sun.",
+      ],
+      otherProtection: [
+        "Spend time in shade when the sun is strongest.",
+        "Use covering clothing, a wide-brimmed hat, and suitable sunglasses.",
+        "Do not use sunscreen as a reason to stay in the sun longer.",
+      ],
+      boundary:
+        "Product labels and public-health recommendations vary by country. Follow the instructions on the sunscreen and use local UV guidance.",
+    },
+    sources: [
+      {
+        title: "Sunscreen and sun safety",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/live-well/seasonal-health/sunscreen-and-sun-safety/",
+        accessed: "2026-09-13",
+      },
+    ],
+    disclaimer:
+      "This information is for educational purposes only and does not constitute medical advice.",
+  },
+
+  "molecare://knowledge/common-benign-lesions": {
+    title: "Common Benign Skin Lesions",
+    content: {
+      overview:
+        "Benign means non-cancerous. Many benign growths have recognisable patterns, but a written description or photograph cannot confirm what a skin lesion is.",
+      examples: [
+        {
+          name: "Seborrhoeic keratosis",
+          description:
+            "A common non-cancerous growth that may have a waxy or wart-like surface and can range from pale to dark brown or black.",
+          limitation:
+            "Its appearance can overlap with actinic keratosis and some skin cancers.",
+        },
+        {
+          name: "Cherry angioma",
+          description:
+            "A common small vascular growth that is often red to purple and may be flat or raised.",
+          limitation: "Other vascular or pigmented lesions can have a similar colour.",
+        },
+        {
+          name: "Dermatofibroma",
+          description:
+            "A firm papule or small nodule that is often pink, tan, or brown and commonly appears on the limbs.",
+          limitation: "Some atypical lesions can resemble a dermatofibroma.",
+        },
+        {
+          name: "Skin tag (acrochordon)",
+          description:
+            "A soft, flesh-coloured growth that often hangs from the skin on a small stalk.",
+          limitation: "A clinician can distinguish it from other raised growths when the appearance is unclear.",
+        },
+      ],
+      clinicalAssessment: [
+        "Clinicians consider a lesion's history, distribution, and appearance rather than relying on one visual feature.",
+        "They may use a dermatoscope for a closer view. If uncertainty remains, a biopsy can allow tissue to be examined under a microscope.",
+      ],
+      boundary:
+        "These are examples of common appearances, not a diagnostic checklist. A lesion should not be labelled benign from this resource alone.",
+    },
+    sources: [
+      {
+        title: "Seborrheic keratoses: Overview",
+        publisher: "American Academy of Dermatology",
+        url: "https://www.aad.org/public/diseases/a-z/seborrheic-keratoses-overview",
+        accessed: "2026-09-13",
+      },
+      {
+        title: "Common benign skin lesions",
+        publisher: "DermNet",
+        url: "https://dermnetnz.org/topics/benign-skin-lesions",
+        accessed: "2026-09-13",
+      },
+      {
+        title: "Diagnosing Common Benign Skin Tumors",
+        publisher: "American Family Physician",
+        url: "https://www.aafp.org/pubs/afp/issues/2015/1001/p601.html",
+        accessed: "2026-09-13",
+      },
+    ],
+    disclaimer:
+      "This information is for educational purposes only and does not constitute medical advice or a diagnosis.",
+  },
+
+  "molecare://knowledge/skin-self-examination": {
+    title: "Skin Self-Examination Technique",
+    content: {
+      purpose:
+        "A skin self-examination helps you become familiar with your skin and record visible changes. It cannot determine whether a lesion is benign or cancerous.",
+      equipment: [
+        "A full-length mirror",
+        "A hand mirror",
+        "Good, even lighting",
+        "A body map or another consistent way to record locations",
+      ],
+      sequence: [
+        "Look at the front and back of your body in a full-length mirror, then raise your arms and check both sides.",
+        "Check your underarms, forearms, palms, fingers, and fingernails.",
+        "Check the front and back of your legs, your feet, between your toes, your toenails, and the soles of your feet.",
+        "Use a hand mirror to check the back of your neck and your scalp, parting the hair to see the skin.",
+        "Use a hand mirror or ask someone you trust to help check areas that are hard to see, such as your back.",
+      ],
+      recording: [
+        "Record the date and location of a spot so later observations can be compared with the same area.",
+        "If you use photographs, keep the lighting, distance, and scale as consistent as possible.",
+        "Photographs are a record for comparison, not a diagnosis.",
+      ],
+      frequency:
+        "How often to examine your skin depends on personal history and professional advice; there is no single schedule in this resource.",
+      boundary:
+        "Self-examination does not replace a professional skin examination. A healthcare professional can assess a new or changing area in clinical context.",
+    },
+    sources: [
+      {
+        title: "Find skin cancer: How to perform a skin self-exam",
+        publisher: "American Academy of Dermatology",
+        url: "https://www.aad.org/public/diseases/skin-cancer/check-skin",
+        accessed: "2026-09-13",
+      },
+      {
+        title: "How to take pictures of your skin for your dermatologist",
+        publisher: "American Academy of Dermatology",
+        url: "https://www.aad.org/public/fad/digital-health/taking-pictures-skin",
+        accessed: "2026-09-13",
+      },
+    ],
+    disclaimer:
+      "This information is for educational purposes only and does not constitute medical advice or a diagnosis.",
+  },
+
+  "molecare://knowledge/dermatology-appointment": {
+    title: "What to Expect at a Dermatology Appointment",
+    content: {
+      beforeTheVisit: [
+        "Note what you want the clinician to examine and how long you have noticed it.",
+        "Be ready to describe visible changes or symptoms and provide relevant medical history, family history, allergies, and medicines.",
+        "Bring earlier photographs if they clearly show how the same area has changed.",
+      ],
+      duringTheVisit: [
+        "The clinician will ask about the concern and examine the affected skin and nearby area.",
+        "A full skin examination, when arranged, may include the scalp and nails as well as the rest of the skin.",
+        "A dermatologist may use a dermatoscope, a magnifying device that provides a closer view of skin structures.",
+      ],
+      possibleNextSteps: [
+        "Not every mole or growth needs a biopsy.",
+        "When a closer laboratory examination is needed, a clinician may numb the area, remove a small skin sample, and send it for examination under a microscope.",
+        "The clinician should explain how results or follow-up information will be provided.",
+      ],
+      boundary:
+        "Appointments differ according to the reason for referral and the service providing care. This overview does not predict which examination or test an individual will receive.",
+    },
+    sources: [
+      {
+        title: "Skin cancer: Symptoms, diagnosis, and causes",
+        publisher: "American Academy of Dermatology",
+        url: "https://www.aad.org/public/diseases/skin-cancer",
+        accessed: "2026-09-13",
+      },
+      {
+        title: "What to expect at a skin cancer check",
+        publisher: "American Academy of Dermatology",
+        url: "https://www.aad.org/public/public-health/skin-cancer-screenings/what-to-expect",
+        accessed: "2026-09-13",
+      },
+      {
+        title: "Skin biopsy",
+        publisher: "University College London Hospitals NHS Foundation Trust",
+        url: "https://www.uclh.nhs.uk/patients-and-visitors/patient-information-pages/skin-biopsy",
+        accessed: "2026-09-13",
+      },
+    ],
+    disclaimer:
+      "This information is for educational purposes only and does not constitute medical advice or a diagnosis.",
   },
 };
 

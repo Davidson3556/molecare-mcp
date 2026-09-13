@@ -163,6 +163,31 @@ server.setRequestHandler(ListResourcesRequestSchema, async () => ({
       description: "Guidelines for when to seek professional medical advice",
       mimeType: "application/json",
     },
+    {
+      uri: "molecare://knowledge/sun-protection",
+      name: "Understanding SPF and Sun Protection",
+      description: "How SPF, UVA labels, sunscreen, shade and clothing fit together",
+      mimeType: "application/json",
+    },
+    {
+      uri: "molecare://knowledge/common-benign-lesions",
+      name: "Common Benign Skin Lesions",
+      description:
+        "Examples of common non-cancerous growths and why appearance alone cannot identify them",
+      mimeType: "application/json",
+    },
+    {
+      uri: "molecare://knowledge/skin-self-examination",
+      name: "Skin Self-Examination Technique",
+      description: "A head-to-toe observation routine for becoming familiar with your skin",
+      mimeType: "application/json",
+    },
+    {
+      uri: "molecare://knowledge/dermatology-appointment",
+      name: "What to Expect at a Dermatology Appointment",
+      description: "How to prepare and what may happen during a routine skin appointment",
+      mimeType: "application/json",
+    },
     // Ontology Resources
     {
       uri: "molecare://ontology/snomed-codes",
