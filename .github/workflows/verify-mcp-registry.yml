@@ -1,0 +1,22 @@
+name: Verify MCP Registry listing
+
+# Releases verify immediately after publishing. This independent run catches
+# later drift, such as an npm version being deprecated or published by hand.
+on:
+  schedule:
+    - cron: '23 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+      - name: Compare the registry listing with npm
+        run: node scripts/verify-registry-listing.mjs

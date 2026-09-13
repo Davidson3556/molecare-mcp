@@ -54,3 +54,8 @@ jobs:
 
       - name: Publish
         run: mcp-publisher publish
+
+      # The registry can accept a publish while still exposing stale metadata.
+      # Verify the public entry and the npm tarball after the write completes.
+      - name: Verify the published registry listing
+        run: node scripts/verify-registry-listing.mjs
