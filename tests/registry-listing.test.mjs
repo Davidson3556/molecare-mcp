@@ -3,8 +3,12 @@ import { test } from "node:test";
 
 import {
   fetchRegistryJson,
+  loadVerificationInput,
+  parseArgs,
+  publishedVersionForCheck,
   retryVerification,
   verifyRegistryListing,
+  warnAboutVersionDifference,
 } from "../scripts/verify-registry-listing.mjs";
 
 const packageJson = {
@@ -62,6 +66,16 @@ function withInput(overrides) {
   return structuredClone({ ...validInput, ...overrides });
 }
 
+function withPublishedVersion(version) {
+  const input = withInput({ expectedPublishedVersion: version, latestNpmVersion: version });
+  input.registryResponse.server.version = version;
+  input.registryResponse.server.packages[0].version = version;
+  input.latestRegistryResponse.server.version = version;
+  input.latestRegistryResponse.server.packages[0].version = version;
+  input.npmMetadata.version = version;
+  return input;
+}
+
 test("accepts matching local, registry, and npm metadata", () => {
   assert.deepEqual(verifyRegistryListing(withInput()), {
     name: "io.github.MoleCare/molecare-mcp",
@@ -101,6 +115,85 @@ test("rejects an npm mcpName that differs from the registry server name", () => 
 test("rejects an npm version that no longer represents the latest release", () => {
   const input = withInput({ latestNpmVersion: "1.2.0" });
   assert.throws(() => verifyRegistryListing(input), /npm latest version mismatch/);
+});
+
+test("scheduled checks select npm latest when main is awaiting a release", () => {
+  assert.equal(publishedVersionForCheck("1.2.0", "1.1.0", true), "1.1.0");
+  assert.equal(publishedVersionForCheck("1.2.0", "1.1.0", false), "1.2.0");
+});
+
+test("published-latest mode is explicit and rejects unknown arguments", () => {
+  assert.deepEqual(parseArgs([]), { verifyPublishedLatest: false });
+  assert.deepEqual(parseArgs(["--verify-published-latest"]), { verifyPublishedLatest: true });
+  assert.throws(() => parseArgs(["--typo"]), /unknown argument: --typo/);
+});
+
+test("published-latest mode emits a warning only when the local version differs", () => {
+  const warnings = [];
+  assert.equal(warnAboutVersionDifference("1.2.0", "1.1.0", (text) => warnings.push(text)), true);
+  assert.equal(warnAboutVersionDifference("1.1.0", "1.1.0", (text) => warnings.push(text)), false);
+  assert.equal(warnings.length, 1);
+  assert.match(warnings[0], /^::warning /);
+  assert.match(warnings[0], /package\.json is 1\.2\.0, while npm latest is 1\.1\.0/);
+});
+
+test("published-latest mode queries the actual release when local manifests are ahead", async () => {
+  const localPackageJson = { ...packageJson, version: "1.2.0" };
+  const localServerJson = structuredClone(serverJson);
+  localServerJson.version = "1.2.0";
+  localServerJson.packages[0].version = "1.2.0";
+  const npmSpecs = [];
+  const registryUrls = [];
+
+  const input = await loadVerificationInput({
+    packageJson: localPackageJson,
+    serverJson: localServerJson,
+    registryBaseUrl: "https://registry.example/",
+    verifyPublishedLatest: true,
+    npmViewImpl: async (packageSpec) => {
+      npmSpecs.push(packageSpec);
+      if (packageSpec.endsWith("@latest")) return "1.1.0";
+      assert.equal(packageSpec, "molecare-mcp@1.1.0");
+      return validInput.npmMetadata;
+    },
+    fetchRegistryJsonImpl: async (url) => {
+      registryUrls.push(url);
+      return url.endsWith("/latest")
+        ? validInput.latestRegistryResponse
+        : validInput.registryResponse;
+    },
+  });
+
+  assert.deepEqual(npmSpecs, ["molecare-mcp@latest", "molecare-mcp@1.1.0"]);
+  assert.deepEqual(registryUrls, [
+    "https://registry.example/v0.1/servers/io.github.MoleCare%2Fmolecare-mcp/versions/1.1.0",
+    "https://registry.example/v0.1/servers/io.github.MoleCare%2Fmolecare-mcp/versions/latest",
+  ]);
+  assert.deepEqual(verifyRegistryListing(input), {
+    name: "io.github.MoleCare/molecare-mcp",
+    package: "molecare-mcp",
+    version: "1.1.0",
+  });
+});
+
+test("scheduled checks still verify the latest published release", () => {
+  assert.deepEqual(verifyRegistryListing(withPublishedVersion("1.0.0")), {
+    name: "io.github.MoleCare/molecare-mcp",
+    package: "molecare-mcp",
+    version: "1.0.0",
+  });
+});
+
+test("scheduled checks still reject drift in the latest published release", () => {
+  const input = withPublishedVersion("1.0.0");
+  input.latestRegistryResponse.server.version = "0.9.0";
+  assert.throws(() => verifyRegistryListing(input), /latest registry version mismatch/);
+});
+
+test("scheduled checks still reject the wrong package version", () => {
+  const input = withPublishedVersion("1.0.0");
+  input.registryResponse.server.packages[0].version = "0.9.0";
+  assert.throws(() => verifyRegistryListing(input), /registry npm package version mismatch/);
 });
 
 test("rejects a deprecated npm package version", () => {

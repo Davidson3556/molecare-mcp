@@ -40,6 +40,7 @@ export function verifyRegistryListing({
   latestRegistryResponse,
   npmMetadata,
   latestNpmVersion,
+  expectedPublishedVersion = packageJson.version,
 }) {
   const expectedPackage = getNpmPackage(serverJson);
   const registryServer = unwrapServer(registryResponse, "registry version");
@@ -51,7 +52,7 @@ export function verifyRegistryListing({
   assertMatch(expectedPackage.version, packageJson.version, "server.json npm package version");
 
   assertMatch(registryServer.name, serverJson.name, "registry server name");
-  assertMatch(registryServer.version, packageJson.version, "registry server version");
+  assertMatch(registryServer.version, expectedPublishedVersion, "registry server version");
 
   const expectedPackageIdentities = (serverJson.packages ?? [])
     .map((entry) => `${entry.registryType}:${entry.identifier}`)
@@ -79,27 +80,53 @@ export function verifyRegistryListing({
         `got ${publishedPackages || "no packages"}`,
     );
   }
-  assertMatch(registryPackage.version, packageJson.version, "registry npm package version");
+  assertMatch(registryPackage.version, expectedPublishedVersion, "registry npm package version");
 
   const registryStatus = registryResponse._meta?.[OFFICIAL_METADATA_KEY]?.status;
   assertMatch(registryStatus, "active", "registry entry status");
   assertMatch(latestRegistryServer.name, serverJson.name, "latest registry server name");
-  assertMatch(latestRegistryServer.version, packageJson.version, "latest registry version");
+  assertMatch(latestRegistryServer.version, expectedPublishedVersion, "latest registry version");
 
-  assertMatch(npmMetadata.version, packageJson.version, "published npm version");
+  assertMatch(npmMetadata.version, expectedPublishedVersion, "published npm version");
   assertMatch(npmMetadata.mcpName, registryServer.name, "published npm mcpName");
   if (typeof npmMetadata.deprecated === "string" && npmMetadata.deprecated.trim()) {
     throw new Error(
-      `npm package ${packageJson.name}@${packageJson.version} is deprecated: ${npmMetadata.deprecated}`,
+      `npm package ${packageJson.name}@${expectedPublishedVersion} is deprecated: ${npmMetadata.deprecated}`,
     );
   }
-  assertMatch(latestNpmVersion, packageJson.version, "npm latest version");
+  assertMatch(latestNpmVersion, expectedPublishedVersion, "npm latest version");
 
   return {
     name: registryServer.name,
     package: expectedPackage.identifier,
-    version: packageJson.version,
+    version: expectedPublishedVersion,
   };
+}
+
+export function publishedVersionForCheck(
+  localVersion,
+  latestNpmVersion,
+  verifyPublishedLatest = false,
+) {
+  return verifyPublishedLatest ? latestNpmVersion : localVersion;
+}
+
+export function parseArgs(args) {
+  const supported = new Set(["--verify-published-latest"]);
+  const unknown = args.filter((argument) => !supported.has(argument));
+  if (unknown.length > 0) {
+    throw new Error(`unknown argument${unknown.length === 1 ? "" : "s"}: ${unknown.join(", ")}`);
+  }
+  return { verifyPublishedLatest: args.includes("--verify-published-latest") };
+}
+
+export function warnAboutVersionDifference(localVersion, publishedVersion, warn = console.warn) {
+  if (localVersion === publishedVersion) return false;
+  warn(
+    `::warning title=Version differs from npm::package.json is ${localVersion}, ` +
+      `while npm latest is ${publishedVersion}; verified the published registry state instead`,
+  );
+  return true;
 }
 
 function wait(milliseconds) {
@@ -183,6 +210,44 @@ async function npmView(packageSpec, ...fields) {
   }
 }
 
+export async function loadVerificationInput({
+  packageJson,
+  serverJson,
+  registryBaseUrl = DEFAULT_REGISTRY_URL,
+  verifyPublishedLatest = false,
+  npmViewImpl = npmView,
+  fetchRegistryJsonImpl = fetchRegistryJson,
+}) {
+  const npmPackage = getNpmPackage(serverJson);
+  const latestNpmVersion = await npmViewImpl(`${npmPackage.identifier}@latest`, "version");
+  const expectedPublishedVersion = publishedVersionForCheck(
+    packageJson.version,
+    latestNpmVersion,
+    verifyPublishedLatest,
+  );
+  const baseUrl = registryBaseUrl.replace(/\/$/, "");
+  const encodedName = encodeURIComponent(serverJson.name);
+  const encodedVersion = encodeURIComponent(expectedPublishedVersion);
+  const versionUrl = `${baseUrl}/v0.1/servers/${encodedName}/versions/${encodedVersion}`;
+  const latestUrl = `${baseUrl}/v0.1/servers/${encodedName}/versions/latest`;
+  const exactPackageSpec = `${npmPackage.identifier}@${expectedPublishedVersion}`;
+  const [registryResponse, latestRegistryResponse, npmMetadata] = await Promise.all([
+    fetchRegistryJsonImpl(versionUrl, { attempts: 1 }),
+    fetchRegistryJsonImpl(latestUrl, { attempts: 1 }),
+    npmViewImpl(exactPackageSpec, "version", "mcpName", "deprecated"),
+  ]);
+
+  return {
+    packageJson,
+    serverJson,
+    registryResponse,
+    latestRegistryResponse,
+    npmMetadata,
+    latestNpmVersion,
+    expectedPublishedVersion,
+  };
+}
+
 async function readJson(path) {
   return JSON.parse(await readFile(path, "utf8"));
 }
@@ -193,32 +258,18 @@ export async function main() {
     readJson(resolve(root, "package.json")),
     readJson(resolve(root, "server.json")),
   ]);
-  const npmPackage = getNpmPackage(serverJson);
+  const { verifyPublishedLatest } = parseArgs(process.argv.slice(2));
   const registryBaseUrl = (process.env.MCP_REGISTRY_URL || DEFAULT_REGISTRY_URL).replace(/\/$/, "");
-  const encodedName = encodeURIComponent(serverJson.name);
-  const encodedVersion = encodeURIComponent(packageJson.version);
-  const versionUrl = `${registryBaseUrl}/v0.1/servers/${encodedName}/versions/${encodedVersion}`;
-  const latestUrl = `${registryBaseUrl}/v0.1/servers/${encodedName}/versions/latest`;
-  const exactPackageSpec = `${npmPackage.identifier}@${packageJson.version}`;
 
-  const verified = await retryVerification(async () => {
-    const [registryResponse, latestRegistryResponse, npmMetadata, latestNpmVersion] =
-      await Promise.all([
-        fetchRegistryJson(versionUrl, { attempts: 1 }),
-        fetchRegistryJson(latestUrl, { attempts: 1 }),
-        npmView(exactPackageSpec, "version", "mcpName", "deprecated"),
-        npmView(`${npmPackage.identifier}@latest`, "version"),
-      ]);
-
-    return {
+  const verified = await retryVerification(() =>
+    loadVerificationInput({
       packageJson,
       serverJson,
-      registryResponse,
-      latestRegistryResponse,
-      npmMetadata,
-      latestNpmVersion,
-    };
-  });
+      registryBaseUrl,
+      verifyPublishedLatest,
+    }),
+  );
+  if (verifyPublishedLatest) warnAboutVersionDifference(packageJson.version, verified.version);
   console.log(
     `Verified ${verified.name} ${verified.version}: registry and npm package ${verified.package} agree`,
   );
