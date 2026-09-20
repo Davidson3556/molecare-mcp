@@ -2,9 +2,9 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { test } from "node:test";
 
-// server.json is the MCP Registry listing. It is only validated when a release
-// fires publish-mcp-registry.yml, which is after the tag exists and after npm
-// has the version, so a mistake here is expensive to unwind. v1.1.0 shipped a
+// server.json is the MCP Registry listing. Publishing happens after the tag
+// exists and npm has the version, so a mistake here is expensive to unwind.
+// v1.1.0 shipped a
 // 129-character description and the registry rejected it with a 422; the tag
 // and the GitHub release were already public by then.
 const server = JSON.parse(readFileSync(new URL("../server.json", import.meta.url)));
