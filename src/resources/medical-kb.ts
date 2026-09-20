@@ -527,10 +527,10 @@ const RESOURCES: Record<string, Resource> = {
         accessed: "2026-09-13",
       },
       {
-        title: "Skin biopsy",
-        publisher: "University College London Hospitals NHS Foundation Trust",
-        url: "https://www.uclh.nhs.uk/patients-and-visitors/patient-information-pages/skin-biopsy",
-        accessed: "2026-09-13",
+        title: "Tests and next steps for melanoma skin cancer",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/melanoma-skin-cancer/tests-and-next-steps-for-melanoma-skin-cancer/",
+        accessed: "2026-09-20",
       },
     ],
     disclaimer:
