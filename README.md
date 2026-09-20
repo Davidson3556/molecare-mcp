@@ -109,6 +109,8 @@ to keep integrations in mock mode.
 | `LOG_LEVEL` | Logging verbosity: `debug`, `info`, `warn`, or `error` | `info` |
 | `MCP_HEALTH_PORT` | Preferred port for the optional HTTP `/health` endpoint | `3000` |
 | `PORT` | Fallback health port, useful for container platforms | `3000` |
+| `PRIVACY_GATE_URL` | Optional local sidecar that checks tool results before egress | `http://localhost:8231` |
+| `PRIVACY_GATE_TIMEOUT_MS` | Privacy-gate request timeout in milliseconds | `4000` |
 
 ### Public server (`molecare-mcp`)
 

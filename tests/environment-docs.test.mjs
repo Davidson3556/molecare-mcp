@@ -51,9 +51,10 @@ function environmentVariables(files) {
   const variables = new Set();
   for (const file of files) {
     const source = readFileSync(file, "utf8");
-    const pattern = /process\.env(?:\.([A-Z][A-Z0-9_]*)|\[["']([A-Z][A-Z0-9_]*)["']\])/g;
+    const pattern =
+      /\b(?:process\.env(?:\.([A-Z][A-Z0-9_]*)|\[["']([A-Z][A-Z0-9_]*)["']\])|env\.([A-Z][A-Z0-9_]*))/g;
     for (const match of source.matchAll(pattern)) {
-      variables.add(match[1] ?? match[2]);
+      variables.add(match[1] ?? match[2] ?? match[3]);
     }
   }
   return variables;
