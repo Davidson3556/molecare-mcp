@@ -95,21 +95,61 @@ files that sync to cloud drives.
 
 ## Environment variables
 
-All optional unless you want live backends.
+Every setting is optional. The public server falls back to mock product data
+without API credentials, and its knowledge tools continue to work offline. For
+the operations server, use `NODE_ENV=development` (the `.env.example` default)
+to keep integrations in mock mode.
+
+### Shared by both binaries
 
 | Variable | Purpose | Example |
 |----------|---------|---------|
-| `MOLECARE_API_URL` | MoleCare HTTP API | `http://localhost:8080/api` |
-| `MOLECARE_API_KEY` | API bearer / key | `local-dev-key` |
-| `ONTOLOGY_API_URL` | Ontology service | `http://localhost:8081` |
-| `MLFLOW_TRACKING_URI` | MLflow | `http://localhost:5000` |
-| `FEAST_REPO_PATH` / feature store URL | Feast | — |
-| `AWS_REGION` | EC2 / CloudWatch clients | `us-east-1` |
-| `GITHUB_TOKEN` | CI/CD tools | — |
-| `MCP_HEALTH_PORT` | Bind an HTTP `/health` endpoint. Unset by default — stdio clients do not need it | `3000` |
-| `PORT` | Same, for container health probes | `3000` |
+| `MOLECARE_API_URL` | MoleCare-compatible HTTP API | `http://localhost:8080/api` |
+| `MOLECARE_API_KEY` | API bearer/key; required with a real MoleCare API | `local-dev-key` |
+| `LOG_LEVEL` | Logging verbosity: `debug`, `info`, `warn`, or `error` | `info` |
+| `MCP_HEALTH_PORT` | Preferred port for the optional HTTP `/health` endpoint | `3000` |
+| `PORT` | Fallback health port, useful for container platforms | `3000` |
+| `PRIVACY_GATE_URL` | Optional local sidecar that checks tool results before egress | `http://localhost:8231` |
+| `PRIVACY_GATE_TIMEOUT_MS` | Privacy-gate request timeout in milliseconds | `4000` |
 
-See [`.env.example`](./.env.example).
+### Public server (`molecare-mcp`)
+
+The public server has no additional settings. Its dermatology knowledge works
+without configuration; the shared MoleCare API variables enable its optional
+mole and profile tools.
+
+### Operations server (`molecare-ops-mcp`)
+
+The operations binary also accepts the shared settings above. These additional
+variables only configure its infrastructure, monitoring, and CI/CD tools:
+
+| Variable | Purpose | Example |
+|----------|---------|---------|
+| `NODE_ENV` | `development` forces mock mode; use `production` only with configured services | `development` |
+| `MLFLOW_TRACKING_URI` | MLflow tracking server | `http://localhost:5000` |
+| `MLFLOW_API_KEY` | Optional MLflow API key | — |
+| `ML_SERVING_URL` | Model-serving health endpoint | `http://localhost:5000/health` |
+| `FEAST_SERVER_URL` | Feast feature server | `http://localhost:6566` |
+| `FEAST_PROJECT` | Feast project name | `molecare` |
+| `WEB_APP_URL` | MoleCare web application | `http://localhost:3000` |
+| `MOBILE_API_URL` | MoleCare mobile API | `http://localhost:8080/api` |
+| `ADMIN_API_URL` | MoleCare admin API | `http://localhost:8080` |
+| `BACKEND_URL` | Backend health endpoint | `http://localhost:8080` |
+| `METRICS_API_URL` | Application metrics API; leaving it empty keeps app monitoring mocked | — |
+| `GITHUB_OWNER` | Repository owner used by CI/CD tools | `MoleCare` |
+| `GITHUB_REPO` | Repository name used by CI/CD tools | `MoleCare-ML` |
+| `GITHUB_TOKEN` | GitHub token used by CI/CD tools | — |
+| `AWS_REGION` | AWS region used by EC2 and CloudWatch tools | `us-east-1` |
+| `AWS_PROFILE` | Named AWS credential profile | — |
+| `AWS_ACCESS_KEY_ID` | AWS SDK credential-chain access key; prefer a role or profile | — |
+| `EC2_INSTANCE_IDS` | Comma-separated EC2 instance IDs | — |
+| `DB_HOST` | PostgreSQL host used by database health checks | `localhost` |
+| `DB_PORT` | PostgreSQL port | `5432` |
+| `DB_NAME` | PostgreSQL database name | `molecare` |
+| `REDIS_HOST` | Redis host and port | `localhost:6379` |
+| `ES_HOST` | Elasticsearch host and port | `localhost:9200` |
+
+See [`.env.example`](./.env.example) for the copyable source-of-truth list.
 
 ---
 
@@ -298,7 +338,9 @@ Please keep secrets out of examples and prefer localhost defaults.
 
 ## Related
 
-> **Environment variables:** `.env.example` is the authoritative list (all 27 variables read by the source). Regenerate the ground truth with `grep -rhoE "process\.env\.[A-Z_0-9]+" src/`. `ONTOLOGY_API_URL` and `FEAST_REPO_PATH` are not read by any source file.
+> **Environment variables:** `.env.example` is the authoritative list. CI compares
+> it with the variables reachable from both server entrypoints and checks the
+> public/operations grouping above.
 
 - [Model Context Protocol](https://modelcontextprotocol.io)  
 - [MoleCare](https://www.molecare.co.uk/)  

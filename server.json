@@ -32,22 +32,6 @@
           "format": "string"
         },
         {
-          "name": "MLFLOW_TRACKING_URI",
-          "description": "MLflow tracking server for experiment and model-run tools. Mocked when unset.",
-          "isRequired": false,
-          "isSecret": false,
-          "format": "string",
-          "default": "http://localhost:5000"
-        },
-        {
-          "name": "AWS_REGION",
-          "description": "AWS region for EC2 and CloudWatch operations tools. Credentials come from the standard AWS chain.",
-          "isRequired": false,
-          "isSecret": false,
-          "format": "string",
-          "default": "us-east-1"
-        },
-        {
           "name": "LOG_LEVEL",
           "description": "Logging verbosity (error, warn, info, debug).",
           "isRequired": false,

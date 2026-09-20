@@ -357,26 +357,46 @@ logger.toolCall({
 
 ## Configuration
 
-Your MCP server is configured in `.claude/claude_desktop_config.json`:
+Configure the public server in your MCP client's settings. It only needs the
+MoleCare API variables when you want live product data; the bundled educational
+knowledge works without them:
 
 ```json
 {
   "mcpServers": {
     "molecare": {
-      "command": "node",
-      "args": ["/path/to/molecare-mcp/dist/index.js"],
+      "command": "npx",
+      "args": ["-y", "molecare-mcp"],
       "env": {
-        "NODE_ENV": "development",
         "MOLECARE_API_URL": "http://localhost:8080/api",
-        "MLFLOW_TRACKING_URI": "http://localhost:5000",
-        "AWS_REGION": "us-east-1",
-        "WEB_APP_URL": "http://localhost:3000",
-        "MOBILE_API_URL": "http://localhost:8080/api"
+        "MOLECARE_API_KEY": "your-local-api-key"
       }
     }
   }
 }
 ```
+
+Infrastructure and MLOps settings belong to the separate operations binary:
+
+```json
+{
+  "mcpServers": {
+    "molecare-ops": {
+      "command": "npx",
+      "args": ["-y", "-p", "molecare-mcp", "molecare-ops-mcp"],
+      "env": {
+        "NODE_ENV": "development",
+        "MLFLOW_TRACKING_URI": "http://localhost:5000",
+        "AWS_REGION": "us-east-1",
+        "WEB_APP_URL": "http://localhost:3000"
+      }
+    }
+  }
+}
+```
+
+The complete, binary-specific variable list is in the README and
+`.env.example`.
 
 ## Summary: How MCP Helps Your Daily Work
 

@@ -72,8 +72,6 @@ function runServer() {
         ...process.env,
         MOLECARE_API_URL: UNREACHABLE,
         MOLECARE_API_KEY: CANARY,
-        ONTOLOGY_API_URL: UNREACHABLE,
-        ONTOLOGY_API_KEY: CANARY,
       },
       stdio: ["pipe", "pipe", "pipe"],
     });
