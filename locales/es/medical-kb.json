@@ -1,0 +1,353 @@
+{
+  "knowledgeBase": {
+    "asymmetry": {
+      "term": "Asimetría",
+      "keywords": [
+        "abcde",
+        "simetría",
+        "forma",
+        "desigual",
+        "asimetria",
+        "simetria"
+      ],
+      "definition": "Cuando una mitad de un lunar no coincide con la otra mitad",
+      "details": "Los lunares benignos suelen ser simétricos. Si se traza una línea por el centro, ambas mitades deberían tener un aspecto similar. La asimetría puede ser una señal de advertencia que conviene vigilar.",
+      "significance": "La asimetría es la «A» de la regla ABCDE para la detección del melanoma. Una asimetría marcada justifica una evaluación profesional.",
+      "examples": [
+        "Un lado más grande que el otro",
+        "Forma desigual",
+        "Textura diferente en cada mitad"
+      ]
+    },
+    "border": {
+      "term": "Borde",
+      "keywords": [
+        "abcde",
+        "borde",
+        "bordes",
+        "contorno",
+        "margen"
+      ],
+      "definition": "Los bordes o el contorno de un lunar",
+      "details": "Los lunares benignos suelen tener bordes lisos y uniformes. Los bordes irregulares, dentados, con muescas o borrosos pueden ser motivo de preocupación y conviene vigilarlos.",
+      "significance": "La irregularidad del borde es la «B» de la regla ABCDE. Los bordes mal definidos o que se extienden hacia la piel circundante requieren atención.",
+      "examples": [
+        "Bordes festoneados",
+        "Borde con muescas",
+        "Bordes borrosos o poco definidos"
+      ]
+    },
+    "color": {
+      "term": "Color",
+      "keywords": [
+        "abcde",
+        "color",
+        "pigmento",
+        "pigmentación",
+        "pigmentacion"
+      ],
+      "definition": "La pigmentación dentro de un lunar",
+      "details": "La mayoría de los lunares benignos tienen un solo tono de marrón. La presencia de varios colores o una distribución desigual del color puede ser una señal de advertencia. Preste atención a los tonos negros, rojos, blancos o azules.",
+      "significance": "La variación del color es la «C» de la regla ABCDE. La presencia de varios colores en un mismo lunar, especialmente colores inusuales, debe ser evaluada.",
+      "examples": [
+        "Varios tonos de marrón",
+        "Zonas de pigmento negro",
+        "Zonas rojas, blancas o azules"
+      ]
+    },
+    "diameter": {
+      "term": "Diámetro",
+      "keywords": [
+        "abcde",
+        "tamaño",
+        "anchura",
+        "6 mm",
+        "grande",
+        "6mm",
+        "diametro",
+        "tamano"
+      ],
+      "definition": "El tamaño de un lunar medido en su punto más ancho",
+      "details": "Cuando se diagnostican, los melanomas suelen medir más de 6 mm (aproximadamente el tamaño de la goma de borrar de un lápiz). Sin embargo, pueden ser más pequeños cuando se detectan por primera vez.",
+      "significance": "El diámetro es la «D» de la regla ABCDE. Los lunares de más de 6 mm deben vigilarse atentamente, aunque el tamaño por sí solo no permite establecer un diagnóstico.",
+      "examples": [
+        "Lunar más grande que la goma de borrar de un lápiz",
+        "Lunar que está creciendo",
+        "Lunar que era pequeño pero ha aumentado de tamaño"
+      ]
+    },
+    "evolution": {
+      "term": "Evolución",
+      "keywords": [
+        "abcde",
+        "cambio",
+        "cambiante",
+        "evolución",
+        "crecimiento",
+        "evolucion"
+      ],
+      "definition": "Cambios en un lunar a lo largo del tiempo",
+      "details": "Cualquier cambio en el tamaño, la forma, el color o la elevación de un lunar, o cualquier síntoma nuevo, como sangrado, picor o formación de costras, puede ser significativo.",
+      "significance": "La evolución es la «E» de la regla ABCDE y se considera una de las señales de advertencia más importantes. Cualquier lunar que cambie debe ser evaluado.",
+      "examples": [
+        "Lunar que ha crecido",
+        "Cambio de color a lo largo de varios meses",
+        "Síntomas nuevos, como picor",
+        "Sangrado sin haberse lesionado"
+      ]
+    },
+    "melanoma": {
+      "term": "Melanoma",
+      "keywords": [
+        "cáncer de piel",
+        "cáncer",
+        "maligno",
+        "tumor",
+        "melanoma",
+        "cancer de piel",
+        "cancer"
+      ],
+      "definition": "Un tipo de cáncer de piel que se desarrolla a partir de las células que dan color a la piel",
+      "details": "El melanoma es el tipo más grave de cáncer de piel. Se desarrolla cuando las células que producen el pigmento (melanocitos) mutan y se vuelven cancerosas. La detección temprana es fundamental para que el tratamiento tenga éxito.",
+      "significance": "Cuando se detecta temprano, el melanoma puede tratarse con muy buenos resultados. Los autoexámenes periódicos de la piel y las revisiones profesionales son importantes para la detección temprana.",
+      "examples": [
+        "Crecimiento nuevo e inusual",
+        "Lunar existente que cambia",
+        "Llaga que no se cura"
+      ]
+    },
+    "skin-types": {
+      "term": "Fototipos cutáneos de Fitzpatrick",
+      "keywords": [
+        "fitzpatrick",
+        "tipo de piel",
+        "fototipo",
+        "quemaduras"
+      ],
+      "definition": "Un sistema de clasificación de la piel basado en su respuesta a la exposición solar",
+      "details": "Tipo I: Piel muy clara, siempre se quema. Tipo II: Piel clara, suele quemarse. Tipo III: Tono medio, a veces se quema. Tipo IV: Piel oliva, rara vez se quema. Tipo V: Piel morena, muy rara vez se quema. Tipo VI: Piel marrón oscura o negra, nunca se quema.",
+      "significance": "Las personas con fototipos más claros (I-II) tienen un mayor riesgo de daño solar y cáncer de piel. Todos los tipos de piel necesitan protección solar.",
+      "examples": []
+    },
+    "sunscreen": {
+      "term": "Protector solar",
+      "keywords": [
+        "fps",
+        "spf",
+        "bloqueador solar",
+        "crema solar",
+        "protección solar",
+        "proteccion solar"
+      ],
+      "definition": "Un producto que protege la piel de los daños causados por la radiación UV",
+      "details": "El FPS (factor de protección solar; SPF en inglés) indica la protección frente a los rayos UVB. Los protectores solares de amplio espectro también protegen frente a los rayos UVA. Aplíquelo generosamente entre 15 y 30 minutos antes de la exposición al sol.",
+      "significance": "El uso habitual de protector solar reduce significativamente el riesgo de cáncer de piel. Se recomienda un FPS de 30 o superior para actividades prolongadas al aire libre.",
+      "examples": [
+        "FPS 30+ para uso diario",
+        "FPS 50+ para actividades prolongadas al aire libre",
+        "Resistente al agua para nadar"
+      ]
+    },
+    "self-examination": {
+      "term": "Autoexamen de la piel",
+      "keywords": [
+        "autoexamen",
+        "autorrevisión",
+        "revisión de lunares",
+        "detección",
+        "autorrevision",
+        "revision de lunares",
+        "deteccion"
+      ],
+      "definition": "Revisión periódica de la propia piel para detectar lunares nuevos o cambios en los existentes",
+      "details": "Realice autoexámenes mensuales. Use espejos para revisar las zonas difíciles de ver. Preste atención a cualquier lunar nuevo o a los cambios en lunares existentes. Documéntelos con fotografías.",
+      "significance": "Los autoexámenes periódicos ayudan a detectar el cáncer de piel de forma temprana, cuando es más tratable. Conozca su piel y comunique cualquier inquietud a su médico.",
+      "examples": [
+        "Revise toda la piel, incluidos los espacios entre los dedos de los pies",
+        "Use un espejo para examinarse la espalda",
+        "Anote la ubicación de todos los lunares"
+      ]
+    },
+    "uv-protection": {
+      "term": "Protección UV",
+      "keywords": [
+        "uv",
+        "ultravioleta",
+        "seguridad solar",
+        "sombra",
+        "protección solar",
+        "proteccion solar"
+      ],
+      "definition": "Métodos para proteger la piel de la radiación ultravioleta",
+      "details": "La protección UV incluye protector solar, ropa protectora, buscar la sombra y evitar las horas de mayor intensidad solar (de 10 a. m. a 4 p. m.). La exposición a los rayos UV se acumula a lo largo de la vida.",
+      "significance": "La radiación UV es la principal causa del cáncer de piel. Una protección constante es esencial independientemente de las condiciones meteorológicas o de la estación del año.",
+      "examples": [
+        "Use sombreros de ala ancha",
+        "Use ropa con protección UV",
+        "Use gafas de sol"
+      ]
+    }
+  },
+  "disclaimers": {
+    "educationalOnly": "Esta información se ofrece únicamente con fines educativos y no constituye asesoramiento médico.",
+    "educationalOnlyWithConsult": "Esta información se ofrece únicamente con fines educativos y no constituye asesoramiento médico. En caso de duda, consulte siempre a un profesional de la salud.",
+    "educationalOnlyPleaseConsult": "Esta información se ofrece únicamente con fines educativos y no constituye asesoramiento médico. Consulte a un profesional de la salud si tiene alguna preocupación relacionada con su salud."
+  },
+  "resources": {
+    "molecare://knowledge/abcde-criteria": {
+      "name": "Criterios ABCDE del melanoma",
+      "description": "La regla ABCDE para identificar lunares potencialmente cancerosos",
+      "title": "Criterios ABCDE para la detección del melanoma",
+      "content": {
+        "overview": "La regla ABCDE es una guía útil para identificar lunares potencialmente cancerosos.",
+        "criteria": [
+          {
+            "letter": "A",
+            "name": "Asimetría",
+            "description": "Una mitad no coincide con la otra",
+            "what_to_look_for": "Trace una línea imaginaria a través del lunar: ¿coinciden ambas mitades?"
+          },
+          {
+            "letter": "B",
+            "name": "Borde",
+            "description": "Bordes irregulares, dentados o borrosos",
+            "what_to_look_for": "¿Los bordes son lisos y uniformes, o irregulares y con muescas?"
+          },
+          {
+            "letter": "C",
+            "name": "Color",
+            "description": "Color desigual o varios colores",
+            "what_to_look_for": "¿Tiene un color uniforme o presenta varios tonos o colores?"
+          },
+          {
+            "letter": "D",
+            "name": "Diámetro",
+            "description": "Más de 6 mm (el tamaño de la goma de borrar de un lápiz)",
+            "what_to_look_for": "¿Es más grande que la goma de borrar de un lápiz? ¿Ha crecido?"
+          },
+          {
+            "letter": "E",
+            "name": "Evolución",
+            "description": "Cambios de tamaño, forma o color",
+            "what_to_look_for": "¿Ha cambiado el lunar de alguna manera con el tiempo?"
+          }
+        ],
+        "important_note": "No todos los melanomas siguen estas reglas, y no todos los lunares con estas características son cancerosos. En caso de duda, consulte a un dermatólogo."
+      },
+      "disclaimerKey": "educationalOnly"
+    },
+    "molecare://knowledge/skin-types": {
+      "name": "Fototipos cutáneos de Fitzpatrick",
+      "description": "Clasificación de los tipos de piel y los riesgos asociados",
+      "title": "Clasificación de los fototipos cutáneos de Fitzpatrick",
+      "content": {
+        "overview": "La escala de Fitzpatrick clasifica los tipos de piel según su respuesta a la exposición a los rayos UV.",
+        "types": [
+          {
+            "type": 1,
+            "description": "Piel muy clara, ojos claros, pecas",
+            "sunResponse": "Siempre se quema, nunca se broncea",
+            "riskLevel": "Riesgo más alto de daño solar"
+          },
+          {
+            "type": 2,
+            "description": "Piel clara, ojos claros",
+            "sunResponse": "Suele quemarse, se broncea mínimamente",
+            "riskLevel": "Riesgo alto de daño solar"
+          },
+          {
+            "type": 3,
+            "description": "Tono de piel medio",
+            "sunResponse": "A veces se quema, se broncea gradualmente",
+            "riskLevel": "Riesgo moderado de daño solar"
+          },
+          {
+            "type": 4,
+            "description": "Tono de piel oliva",
+            "sunResponse": "Rara vez se quema, se broncea con facilidad",
+            "riskLevel": "Riesgo menor, aunque sigue necesitando protección"
+          },
+          {
+            "type": 5,
+            "description": "Tono de piel moreno",
+            "sunResponse": "Muy rara vez se quema, se broncea con mucha facilidad",
+            "riskLevel": "Riesgo menor, aunque sigue necesitando protección"
+          },
+          {
+            "type": 6,
+            "description": "Piel marrón oscura o negra",
+            "sunResponse": "Nunca se quema",
+            "riskLevel": "Riesgo más bajo, aunque el daño solar sigue siendo posible"
+          }
+        ],
+        "recommendation": "Todos los tipos de piel se benefician de la protección solar. Los fototipos más claros requieren una vigilancia adicional."
+      },
+      "disclaimerKey": "educationalOnly"
+    },
+    "molecare://knowledge/prevention-tips": {
+      "name": "Prevención del cáncer de piel",
+      "description": "Consejos para prevenir el cáncer de piel y proteger la piel",
+      "title": "Consejos para prevenir el cáncer de piel",
+      "content": {
+        "dailyHabits": [
+          "Aplique a diario protector solar de amplio espectro con FPS 30+, incluso en días nublados",
+          "Vuelva a aplicar el protector solar cada 2 horas cuando esté al aire libre",
+          "Use ropa protectora, incluidos sombreros de ala ancha",
+          "Busque la sombra durante las horas de mayor intensidad UV (de 10 a. m. a 4 p. m.)",
+          "Use gafas de sol que bloqueen los rayos UV"
+        ],
+        "selfExamination": [
+          "Realice autoexámenes mensuales de la piel",
+          "Use espejos para revisar las zonas difíciles de ver",
+          "Fotografíe los lunares para hacer un seguimiento de los cambios",
+          "Tome nota de cualquier lunar nuevo o de los cambios en los existentes",
+          "Revise la piel de la cabeza a los pies, incluidos el cuero cabelludo y los espacios entre los dedos de los pies"
+        ],
+        "professionalCare": [
+          "Programe revisiones anuales de la piel con un dermatólogo",
+          "Realice revisiones más frecuentes si tiene factores de riesgo",
+          "Comunique de inmediato cualquier cambio preocupante",
+          "No espere a que los síntomas empeoren"
+        ],
+        "thingsToAvoid": [
+          "Evite las camas de bronceado y las lámparas solares",
+          "No permanezca al sol hasta quemarse",
+          "Evite exponerse al sol durante las horas de máxima intensidad sin protección",
+          "No ignore los lunares que cambian"
+        ]
+      },
+      "disclaimerKey": "educationalOnly"
+    },
+    "molecare://knowledge/when-to-see-doctor": {
+      "name": "Cuándo consultar a un dermatólogo",
+      "description": "Orientación sobre cuándo buscar asesoramiento médico profesional",
+      "title": "Cuándo consultar a un dermatólogo",
+      "content": {
+        "seeImmediately": [
+          "Un lunar que cambia rápidamente",
+          "Un lunar que sangra sin haberse lesionado",
+          "Una lesión nueva que crece rápidamente",
+          "Una llaga que no se cura en 3 semanas",
+          "Cualquier lunar con características ABCDE de alto riesgo"
+        ],
+        "scheduleAppointment": [
+          "Cualquier lunar nuevo después de los 30 años",
+          "Un lunar que tiene un aspecto diferente al de los demás",
+          "Cambios graduales en un lunar existente",
+          "Antecedentes familiares de melanoma",
+          "Antecedentes personales de cáncer de piel",
+          "Muchos lunares (50 o más)",
+          "Antecedentes de quemaduras solares con ampollas"
+        ],
+        "routineScreening": [
+          "Revisión anual de la piel para todas las personas",
+          "Revisiones más frecuentes para las personas de alto riesgo",
+          "Después de encontrar cualquier lunar sospechoso",
+          "Si trabaja al aire libre con frecuencia"
+        ],
+        "whatToExpect": "Un dermatólogo le examinará la piel, posiblemente con un dermatoscopio (dispositivo de aumento). Puede fotografiar los lunares para hacerles seguimiento o realizar una biopsia si fuera necesario."
+      },
+      "disclaimerKey": "educationalOnlyWithConsult"
+    }
+  }
+}
